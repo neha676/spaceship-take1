@@ -11,24 +11,26 @@
     <div>
       <form class="example-form">
         <mat-form-field appearance="fill">
-          <mat-label>Favorite food</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let food of foods" [value]="food.value">
-              {{food.viewValue}}
+          <mat-label>Select Planet</mat-label>
+          <mat-select  [(ngModel)]="selectedValue" name="planet" (ngModelChange)="onChange($event)">
+            <mat-option *ngFor="let planet of planets" [value]="planet.name">
+              {{planet.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </form>
+      {{selectedValue}}
     </div>
   </mat-expansion-panel>
+  
   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <div>
       <form class="example-form">
         <mat-form-field appearance="fill">
-          <mat-label>Favorite food</mat-label>
+          <mat-label>Select Planet</mat-label>
           <mat-select>
-            <mat-option *ngFor="let food of foods" [value]="food.value">
-              {{food.viewValue}}
+            <mat-option *ngFor="let planet of planets"[value]="planet.name" >
+              {{planet.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
