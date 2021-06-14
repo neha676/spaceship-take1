@@ -19,9 +19,19 @@
           </mat-select>
         </mat-form-field>
       </form>
-      {{selectedValue}}
+      <!-- {{selectedValue}} -->
     </div>
+    <mat-radio-group
+    aria-labelledby="example-radio-group-label"
+    class="example-radio-group"
+    [disabled]="showradio()"
+    >
+    <mat-radio-button class="example-radio-button" *ngFor="let vehicle of vehicles" [value]="vehicle.name">
+      {{vehicle.name}}
+    </mat-radio-button>
+  </mat-radio-group>
   </mat-expansion-panel>
+  
   
   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <div>

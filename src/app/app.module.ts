@@ -11,6 +11,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select'; 
 
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
+    MatRadioModule,
     HttpClientModule
   ],
   providers: [],
