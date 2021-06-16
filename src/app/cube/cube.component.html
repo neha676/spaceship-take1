@@ -29,7 +29,7 @@
     (ngModelChange)="checker()"
     >
     <mat-radio-button class="example-radio-button" *ngFor="let vehicle of vehicles" [value]="vehicle.name">
-      {{vehicle.name}}
+      {{vehicle.name + ' (' + vehicle.total_no+') '}}
     </mat-radio-button>
   </mat-radio-group>
   </mat-expansion-panel>
@@ -63,7 +63,7 @@
     (ngModelChange)="checker()"
     >
     <mat-radio-button class="example-radio-button" *ngFor="let vehicle of vehicles" [value]="vehicle.name">
-      {{vehicle.name}}
+ {{vehicle.name + ' (' + vehicle.total_no+')'}}
     </mat-radio-button>
   </mat-radio-group>
   </mat-expansion-panel>
@@ -98,7 +98,7 @@
     (ngModelChange)="checker()"
     >
     <mat-radio-button class="example-radio-button" *ngFor="let vehicle of vehicles" [value]="vehicle.name">
-      {{vehicle.name}}
+      {{vehicle.name + ' (' + vehicle.total_no+') '}}
     </mat-radio-button>
   </mat-radio-group>
   </mat-expansion-panel>
@@ -119,6 +119,7 @@
           <mat-select  [(ngModel)]="selectedValue3" name="planet" (ngModelChange)="showRadio3($event)">
             <mat-option *ngFor="let planet of planets" [value]="planet.name">
               {{planet.name}}
+              
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -133,12 +134,12 @@
     (ngModelChange)="checker()"
     >
     <mat-radio-button class="example-radio-button" *ngFor="let vehicle of vehicles" [value]="vehicle.name">
-      {{vehicle.name}}
+      {{vehicle.name + ' (' + vehicle.total_no+') '}}
     </mat-radio-button>
   </mat-radio-group>
   </mat-expansion-panel>
   
   <button mat-button color="primary" (click)="myClickFunction()" [disabled]="buttonGo">Go</button>
-  
+  {{status}}
   
   </mat-accordion>

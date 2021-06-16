@@ -54,7 +54,7 @@ export class CubeComponent {
   myControl = new FormControl();
   // options: string[] = ['One', 'Two', 'Three'];
   planets: Planet[] = [];
-
+status ="";
 
   planet_names = ['Donlon', 'Enchai', 'Jebing', 'Sapir'];
   vehicle_names = ['Space pod', 'Space Rocket', 'Space Rocket', 'Space Rocket']
@@ -104,6 +104,7 @@ export class CubeComponent {
     this.httpClient.post<any>("https://findfalcone.herokuapp.com/find", { "token": this.token, "planet_names": this.planet_names, "vehicle_names": this.vehicle_names }, { headers }).subscribe(
       (response) => {
         console.log(response);
+        this.status =response.status;
       }
     )
   }
