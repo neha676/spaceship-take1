@@ -26,6 +26,7 @@
     class="example-radio-group"
     [disabled]="showr"
     [(ngModel)]="radioValue" 
+    (ngModelChange)="checker()"
     >
     <mat-radio-button class="example-radio-button" *ngFor="let vehicle of vehicles" [value]="vehicle.name">
       {{vehicle.name}}
@@ -59,6 +60,7 @@
     class="example-radio-group"
     [disabled]="showr1"
     [(ngModel)]="radioValue1" 
+    (ngModelChange)="checker()"
     >
     <mat-radio-button class="example-radio-button" *ngFor="let vehicle of vehicles" [value]="vehicle.name">
       {{vehicle.name}}
@@ -93,6 +95,7 @@
     class="example-radio-group"
     [disabled]="showr2"
     [(ngModel)]="radioValue2" 
+    (ngModelChange)="checker()"
     >
     <mat-radio-button class="example-radio-button" *ngFor="let vehicle of vehicles" [value]="vehicle.name">
       {{vehicle.name}}
@@ -127,6 +130,7 @@
     class="example-radio-group"
     [disabled]="showr3"
     [(ngModel)]="radioValue3" 
+    (ngModelChange)="checker()"
     >
     <mat-radio-button class="example-radio-button" *ngFor="let vehicle of vehicles" [value]="vehicle.name">
       {{vehicle.name}}
