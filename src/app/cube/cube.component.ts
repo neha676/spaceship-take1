@@ -6,22 +6,6 @@ interface Planet {
   name: string;
   distance: number;
 }
-interface Person {
-  token:string
-}
-// interface Food1 {
-//   value: string;
-//   viewValue: string;
-// }
-
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    Authorization: 'my-auth-token'
-  })
-};
-
 @Component({
   selector: 'app-cube',
   templateUrl: './cube.component.html',
@@ -32,25 +16,40 @@ export class CubeComponent {
   vehicles: any[] = [
     {
       "name": "Douglas  Pace",
-      "total_no":34,
+      "total_no":2,
       "max_distance":200,
       "speed":2
     }];
+/// convert above to interface 
+
+    disableRadio_spaceVehicles : boolean[] =[true, true,true,true]
+    
     showr  = true;
     showr1 = true;
     showr2  = true;
     showr3 = true;
+
+    selectValue_planets :string[] =["","","",""];
+
   selectedValue = "";
+  selectedValue1 ="";
+  selectedValue2 ="";
+  selectedValue3 ="";
+  
+  radioValue_spaceVehicles:string[] =[];
+  
   radioValue = "";
   radioValue1 ="";
-  selectedValue1 ="";
   radioValue2 ="";
-  selectedValue2 ="";
   radioValue3 ="";
-  selectedValue3 ="";
+
+
+
   panelOpenState = false;
   planet_names = [{name:"hi"}];
-    token ="";
+  success = "";
+  fplanet = "";
+  token ="";
   buttonGo =true;
   myControl = new FormControl();
   // options: string[] = ['One', 'Two', 'Three'];
@@ -105,6 +104,12 @@ export class CubeComponent {
     
    this.httpClient.post<any>("https://findfalcone.herokuapp.com/find",{"token":this.token,"planet_names":this.p,"vehicle_names":this.v},{headers}).subscribe(
     (response) =>{
+      this.success = response.status
+      this.fplanet =response.planet 
+      if (this.success === "success"){
+        window.alert(this.success)
+      }
+      window.alert(this.success)
       console.log(response); }
    )
     // console.log(h)
@@ -132,7 +137,7 @@ export class CubeComponent {
   
   // }
   
-  showRadio(value: string){
+  showRadio(value: boolean) {
     this.checker();
     return this.showr = false;
   }
@@ -152,7 +157,7 @@ export class CubeComponent {
     return this.showr3 = false;
   }
   myClickFunction(){
-    console.log("sdzsd")
+    // console.log("sdzsd")
     // this.getToken();
     // console.log(this.selectedValue)
     // console.log([this.selectedValue, this.selectedValue1])
