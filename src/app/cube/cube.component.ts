@@ -57,11 +57,14 @@ export class CubeComponent {
   planets: Planet[] = [{ name: 'steak-0', distance: 34 }];
 
 
+    p =['Donlon','Enchai','Jebing','Sapir'];
+      v = ['Space pod','Space Rocket','Space Rocket','Space Rocket']
   // constructor() { }
   constructor(private httpClient: HttpClient) {}
   ngOnInit(): void {
     this.getPlanet();
     this.getVehicles();
+    this.getToken();
     
     // this.getToken();
   }
@@ -97,10 +100,10 @@ export class CubeComponent {
   }
 
   Find(){
-    const headers = { 'Accept': 'application/json'} 
+    const headers = { 'Accept': 'application/json','Content-Type': 'application/json'} 
     // myHeaders.append("Accept", " application/json ");
     
-   this.httpClient.post<any>("https://findfalcone.herokuapp.com/find",{"token":this.token,"planet_names":this.planets,"vehicle_names":this.vehicles},{headers}).subscribe(
+   this.httpClient.post<any>("https://findfalcone.herokuapp.com/find",{"token":this.token,"planet_names":this.p,"vehicle_names":this.v},{headers}).subscribe(
     (response) =>{
       console.log(response); }
    )
@@ -150,11 +153,23 @@ export class CubeComponent {
   }
   myClickFunction(){
     console.log("sdzsd")
-    this.getToken();
-    console.log(this.selectedValue)
-    console.log([this.selectedValue, this.selectedValue1])
-    
-    // this.planet_names.push(this.selectedValue);
+    // this.getToken();
+    // console.log(this.selectedValue)
+    // console.log([this.selectedValue, this.selectedValue1])
+    this.p.pop()
+    this.p.pop()
+    this.p.pop()
+    this.p.pop()
+    this.p.push(this.selectedValue,this.selectedValue1,this.selectedValue2,this.selectedValue3)
+    this.v.pop()
+    this.v.pop()
+    this.v.pop()
+    this.v.pop()
+    this.v.push(this.radioValue,this.radioValue1,this.radioValue2,this.radioValue3)
+
+    console.log(this.v)
+    console.log(this.p)
+        // this.planet_names.push(this.selectedValue);
   // this.planet_names.push(this.selectedValue);
     this.Find();
   }
