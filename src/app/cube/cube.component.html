@@ -1,20 +1,38 @@
 <mat-accordion>
-  <mat-expansion-panel hideToggle >
+  <mat-expansion-panel
+    *ngFor="let i of [1, 2, 3, 4]"
+    hideToggle
+    (opened)="openGroup(i)"
+  >
     <mat-expansion-panel-header>
-      <mat-panel-title>
-        1 Select planet and space ship
-      </mat-panel-title>
+      <mat-panel-title> {{ i }} Select planet and space ship </mat-panel-title>
       <mat-panel-description>
-        Planet : {{selectedValue}} | space ship : {{radioValue}}
+        Planet : {{ selectedPlanets[i] }} planet distance :
+        {{ planet_data[selectedPlanets[i]] }} space ship :
+        {{ selectedVehicles[i] }} Time taken:{{
+          selectedVehicles[i]
+            ? 1 /
+              (vehicle_speed[selectedVehicles[i]] /
+                planet_data[selectedPlanets[i]])
+            : ""
+        }}
       </mat-panel-description>
     </mat-expansion-panel-header>
     <div>
       <form class="example-form">
         <mat-form-field appearance="fill">
           <mat-label>Select Planet</mat-label>
-          <mat-select  [(ngModel)]="selectedValue" name="planet" (ngModelChange)="showRadio($event)">
-            <mat-option *ngFor="let planet of planets" [value]="planet.name">
-              {{planet.name}}
+          <mat-select
+            [(ngModel)]="selectedPlanets[i]"
+            name="planet"
+            (ngModelChange)="showRadio($event, i)"
+          >
+            <mat-option
+              *ngFor="let planet of planets"
+              [value]="planet.name"
+              [disabled]="!showplanets(planet.name)"
+            >
+              {{ planet.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -22,124 +40,32 @@
       <!-- {{selectedValue}} -->
     </div>
     <mat-radio-group
-    aria-labelledby="example-radio-group-label"
-    class="example-radio-group"
-    [disabled]="showr"
-    [(ngModel)]="radioValue" 
-    (ngModelChange)="checker()"
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group"
+      [disabled]="!selectedPlanets[i]"
+      [(ngModel)]="selectedVehicles[i]"
     >
-    <mat-radio-button class="example-radio-button" *ngFor="let vehicle of vehicles" [value]="vehicle.name">
-      {{vehicle.name + ' (' + vehicle.total_no+') '}}
-    </mat-radio-button>
-  </mat-radio-group>
+      <mat-radio-button
+        class="example-radio-button"
+        *ngFor="let vehicle of vehicles"
+        (change)="check($event, i)"
+        [value]="vehicle.name"
+        [disabled]="
+          showpod(selectedPlanets[i], vehicle.name) || vehicle.total_no == 0
+        "
+      >
+        {{ vehicle.name + " (" + vehicle.total_no + ") " }}
+      </mat-radio-button>
+    </mat-radio-group>
   </mat-expansion-panel>
-  <mat-expansion-panel hideToggle >
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        2 Select planet and space ship
-      </mat-panel-title>
-      <mat-panel-description>
-        Planet :{{selectedValue1}} | space ship :{{radioValue1}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div>
-      <form class="example-form">
-        <mat-form-field appearance="fill">
-          <mat-label>Select Planet</mat-label>
-          <mat-select  [(ngModel)]="selectedValue1" name="planet" (ngModelChange)="showRadio1($event)">
-            <mat-option *ngFor="let planet of planets" [value]="planet.name">
-              {{planet.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </form>
-      <!-- {{selectedValue}} -->
-    </div>
-    <mat-radio-group
-    aria-labelledby="example-radio-group-label"
-    class="example-radio-group"
-    [disabled]="showr1"
-    [(ngModel)]="radioValue1" 
-    (ngModelChange)="checker()"
-    >
-    <mat-radio-button class="example-radio-button" *ngFor="let vehicle of vehicles" [value]="vehicle.name">
- {{vehicle.name + ' (' + vehicle.total_no+')'}}
-    </mat-radio-button>
-  </mat-radio-group>
-  </mat-expansion-panel>
-  
-  <mat-expansion-panel hideToggle >
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        3 Select planet and space ship
-      </mat-panel-title>
-      <mat-panel-description>
-        Planet :{{selectedValue2}} | space ship : {{radioValue2}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div>
-      <form class="example-form">
-        <mat-form-field appearance="fill">
-          <mat-label>Select Planet</mat-label>
-          <mat-select  [(ngModel)]="selectedValue2" name="planet" (ngModelChange)="showRadio2($event)">
-            <mat-option *ngFor="let planet of planets" [value]="planet.name">
-              {{planet.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </form>
-      <!-- {{selectedValue}} -->
-    </div>
-    <mat-radio-group
-    aria-labelledby="example-radio-group-label"
-    class="example-radio-group"
-    [disabled]="showr2"
-    [(ngModel)]="radioValue2" 
-    (ngModelChange)="checker()"
-    >
-    <mat-radio-button class="example-radio-button" *ngFor="let vehicle of vehicles" [value]="vehicle.name">
-      {{vehicle.name + ' (' + vehicle.total_no+') '}}
-    </mat-radio-button>
-  </mat-radio-group>
-  </mat-expansion-panel>
-  
-  <mat-expansion-panel hideToggle >
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        4 Select planet and space ship
-      </mat-panel-title>
-      <mat-panel-description>
-        Planet : {{selectedValue3}} |space ship : {{radioValue3}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div>
-      <form class="example-form">
-        <mat-form-field appearance="fill">
-          <mat-label>Select Planet</mat-label>
-          <mat-select  [(ngModel)]="selectedValue3" name="planet" (ngModelChange)="showRadio3($event)">
-            <mat-option *ngFor="let planet of planets" [value]="planet.name">
-              {{planet.name}}
-              
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </form>
-      <!-- {{selectedValue}} -->
-    </div>
-    <mat-radio-group
-    aria-labelledby="example-radio-group-label"
-    class="example-radio-group"
-    [disabled]="showr3"
-    [(ngModel)]="radioValue3" 
-    (ngModelChange)="checker()"
-    >
-    <mat-radio-button class="example-radio-button" *ngFor="let vehicle of vehicles" [value]="vehicle.name">
-      {{vehicle.name + ' (' + vehicle.total_no+') '}}
-    </mat-radio-button>
-  </mat-radio-group>
-  </mat-expansion-panel>
-  
-  <button mat-button color="primary" (click)="myClickFunction()" [disabled]="buttonGo">Go</button>
-  {{status}}
-  
-  </mat-accordion>
+
+  <button
+    mat-button
+    color="primary"
+    (click)="myClickFunction()"
+    [disabled]="!buttonGo"
+  >
+    Go
+  </button>
+  {{ status }}
+</mat-accordion>
